@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+
+<body class="grey-bg">
+
+  <%- include('nav.ejs') %>
+
+    <div class="white-bg">
+      <% for(let i=0; i < posts.length; i++) { %>
+        <div class="list-box">
+          <div class="list-flexbox">
+            <h4>
+              <a href="/detail/<%= posts[i]._id %>">
+                <%= posts[i].title %>
+              </a>
+            </h4>
+            <form action="/edit/<%= posts[i]._id %>"><button>수정</button></form>
+            <span class="delete" data-id="<%= posts[i]._id %>">🗑️</span>
+          </div>
+          <p>
+            <%= posts[i].content %>
+          </p>
+        </div>
+        <% } %>
+
+    </div>
+    <script>
+      let deleteButtons = document.querySelectorAll('.delete');
+      deleteButtons.forEach((button)=> {
+        button.addEventListener('click', function (e) {
+          fetch('/delete?docid=' + e.target.dataset.id, {
+            method: 'DELETE',
+          }).then((r)=>r.text)
+          .then((r)=>e.target.parentElement.parentElement.style.display = 'none')
+        });
+      });
+
+
+
+    </script>
+</body>
+
+</html>

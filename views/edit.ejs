@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+
+<body class="grey-bg">
+
+  <form class="form-box" action="/editpost/<%= post._id %>" method="post">
+    <h4>수정하기</h4>
+    <input type="text" name="title" value="<%= post.title %>">
+    <input type="text" name="content" value="<%= post.content %>">
+    <button type="submit">수정</button>
+  </form> 
+
+</body>
+
+</html>
